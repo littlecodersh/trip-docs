@@ -1,0 +1,10 @@
+site_name: 'trip'
+pages:
+- '介绍':
+    - '项目简介': 'index.md'
+- 'API列表': 'api.md'
+- 'FAQ': 'FAQ.md'
+extra_css: ['docs/bootstrap/css']
+extra_javascript: ['docs/bootstrap/js']
+theme_dir: 'docs/bootstrap'
+repo_url: 'https://github.com/littlecodersh/trip'
