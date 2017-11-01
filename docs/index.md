@@ -37,78 +37,33 @@ Trip的名字来源于其两个依赖包，也旨在将两个包的内容融合�
 
 无论你是使用的2.7，3.3，3.7，Trip都可以完美运行。
 
-## 安装
+## 用户手册
 
-安装Trip非常简单，只需要在命令行中输入：
+这部分内容是最基础的使用说明，如果你有Requests的使用基础，那么这部分完全可以快速浏览甚至
+跳过。我不会怪你不好好看这部分文档的，当然也别因为这里的问题来问我哦。
 
-```bash
-python -m pip install trip
-```
-
-## 文档
-
-你可以在[这里][document]找到本项目详细的文档。
-
-
-## 进阶应用
-
-这里展示部分的进阶应用：
-
-**使用async与await**
-
-```python
-import trip
-
-async def main():
-    r = await trip.get('https://httpbin.org/get', auth=('user', 'pass'))
-    print(r.content)
-
-trip.run(main)
-```
-
-**Cookie的持久化**
-
-```python
-import trip
-
-@trip.coroutine
-def main():
-    s = trip.Session()
-    r = yield s.get(
-        'https://httpbin.org/cookies/set',
-        params={'name': 'value'},
-        allow_redirects=False)
-    r = yield s.get('https://httpbin.org/cookies')
-    print(r.content)
-
-trip.run(main)
-```
-
-**事件挂钩**
-
-```python
-import trip
-
-@trip.coroutine
-def main():
-    def print_url(r, *args, **kwargs):
-        print(r.url)
-    def record_hook(r, *args, **kwargs):
-        r.hook_called = True
-        return r
-    url = 'http://httpbin.org/get'
-    r = yield trip.get('http://httpbin.org', hooks={'response': [print_url, record_hook]})
-    print(r.hook_called)
-
-trip.run(main)
-```
-
-## 如何贡献代码
-
-1. 你可以开启issue与我交流你的想法。
-2. 或者fork这个[项目][homepage]并在 **master** 分支上进行你的修改。
-3. 请务必带上出现问题或者新功能的相关代码，这会给我们的交流带来巨大的帮助。
-4. 最后如果你完成了修改可以通过pull request的方式提交，我会尽快完成测试并合并。
+* [简介](user/intro.md)
+    * [初衷](user/intro/#_2)
+    * [Apache2 License](user/intro.md#apache2-license)
+    * [开源协议](user/intro.md#_3)
+* [安装Trip](user/install.md)
+    * [使用pip安装](user/install.md#pip)
+    * [获得源码](user/install.md#_1)
+* [快速上手](user/quickstart.md)
+    * [发送请求](user/quickstart.md#_2)
+    * [传递URL参数](user/quickstart.md#url)
+    * [响应内容](user/quickstart.md#_3)
+    * [二进制响应内容](user/quickstart.md#_4)
+    * [JSON响应内容](user/quickstart.md#json)
+    * [原始响应内容](user/quickstart.md#_5)
+    * [定制请求头](user/quickstart.md#_6)
+    * [更加复杂的POST请求](user/quickstart.md#post)
+    * [响应状态码](user/quickstart.md#_7)
+    * [响应头](user/quickstart.md#_8)
+    * [Cookie](user/quickstart.md#cookie)
+    * [重定向与请求历史](user/quickstart.md#_9)
+    * [超时](user/quickstart.md#_10)
+    * [错误与异常](user/quickstart.md#_11)
 
 [pyversion-image]: https://img.shields.io/pypi/pyversions/trip.svg
 [pypi]: https://pypi.python.org/pypi/trip
